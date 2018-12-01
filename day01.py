@@ -4,7 +4,7 @@ def read_input(filepath):
 
 
 def solve(input):
-	return sum(i for i in input)
+	return sum(input)
 
 
 def solve2(input):
