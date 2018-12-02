@@ -8,7 +8,7 @@ def solve(input):
 
 
 def solve2(input):
-	s = set([0])
+	s = {0}
 	curr_sum = 0
 	while 1:
 		for i in range(len(input)):
