@@ -3,22 +3,20 @@ def read_input(filepath):
 		return [line.strip() for line in f][0]
 
 
-def solve(input):
-	v = ""  # validated
-	r = input  # rest
-	while 1:
-		if len(r) == 1:
-			v += r[0]
-			break
-		
-		if r[0].lower() == r[1].lower() and r[0] != r[1]:
-			r = (v[-1] if len(v) > 0 else "") + r[2:]
-			v = v[:-1]
-		else:
-			v += r[0]
-			r = r[1:]
+def react(a, b):
+	return a.lower() == b.lower() and a != b
 
-	return len(v)
+
+def solve(input):
+	i = 0
+	while i < len(input) - 1:
+		if react(input[i], input[i+1]):
+			input = input[:i] + input[i+2:]
+			i = max(i - 1, 0)
+		else:
+			i += 1
+
+	return len(input)
 
 
 def solve2(input):
