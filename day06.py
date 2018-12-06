@@ -13,28 +13,24 @@ def read_input(filepath):
 def manhattan_distance(x, y, xx, yy):
 	return abs(x - xx) + abs(y - yy)
 
+
 def solve(input):
-	coord_offset = 10
 	x_max = max(x for x, _ in input)
 	y_max = max(y for _, y in input)
 
 	inf_areas = set()
 	area = defaultdict(int)
-	for x in range(-coord_offset, x_max + coord_offset):
-		for y in range(-coord_offset, y_max + coord_offset):
-			distances = [manhattan_distance(x, y, i[0], i[1]) for i in input]
+	for x in range(x_max + 1):
+		for y in range(y_max + 1):
+			distances = [manhattan_distance(x, y, xi, yi) for xi, yi in input]
 			min_d = min(distances)
 			if distances.count(min_d) == 1:
 				idx = distances.index(min_d)
 				area[idx] += 1
-			if x <= 0 or x >= x_max or y <= 0 or y >= y_max:
-				for i in range(len(distances)):
-					if distances[i] == min_d:
-						inf_areas.add(i)
+				if x <= 0 or x >= x_max or y <= 0 or y >= y_max:
+					inf_areas.add(idx)
 
 	# remove infinite areas
-	print(area)
-	print(inf_areas)
 	for inf in inf_areas:
 		area[inf] = 0
 
@@ -42,7 +38,18 @@ def solve(input):
 
 
 def solve2(input):
-	return 0
+	x_max = max(x for x, _ in input)
+	y_max = max(y for _, y in input)
+
+	area = 0
+	for x in range(x_max + 1):
+		for y in range(y_max + 1):
+			distances = [manhattan_distance(x, y, xi, yi) for xi, yi in input]
+			sum_d = sum(distances)
+			if sum_d <= 10000:
+				area += 1
+
+	return area
 
 
 if __name__ == "__main__":
