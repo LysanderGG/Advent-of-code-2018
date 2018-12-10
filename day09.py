@@ -1,11 +1,6 @@
 from collections import defaultdict
 
 
-def read_input(filepath):
-	with open(filepath) as f:
-		return [x for line in f]
-
-
 def solve(nb_players, last_marble):
 	state = [0, 1]
 	curr_val = 2
